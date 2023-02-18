@@ -1,23 +1,29 @@
 #!/usr/bin/python3
 
-def countProcess(num):
-    """ Return list of process until n H """
-    con = 1
-    p_list = []
-    val = num
-    while val != 1:
-        con += 1
-        if val % con == 0:
-            while (val % con == 0 and val != 1):
-                val /= con
-                p_list.append(con)
-
-    return p_list
+"""
+    Method that determines the number of minmum operations given n characters
+"""
 
 
 def minOperations(n):
-    """ Return sum of process until n H """
-    if n < 2 or type(n) is not int:
-        return 0
-    results = countProcess(n)
-    return sum(results)
+    """
+        A function that calculates the fewest number of operations
+        needed to give a result of exactly n H characters in a file
+        args: n: Number of characters to be displayed
+        return:
+               number of min operations
+    """
+
+    now = 1
+    start = 0
+    counter = 0
+    while now < n:
+        remainder = n - now
+        if (remainder % now == 0):
+            start = now
+            now += start
+            counter += 2
+        else:
+            now += start
+            counter += 1
+    return counter
